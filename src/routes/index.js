@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/users', UsersController.index); 
+router.get('/users/:id', UsersController.find);
 router.post('/users', UsersController.store); 
 router.delete('/users/:id', UsersController.destroy);
 
@@ -17,6 +18,11 @@ router.get('/courses', CoursesController.index);
 router.post('/courses', CoursesController.store);
 router.delete('/courses/:id', CoursesController.destroy);
 
-router.get('/login', AuthController.login);
+/**
+ * TODO:
+ * Agregar la autenticacion por jwt
+ * Agregar la ruta de logout 
+ */
+router.post('/login', AuthController.login);
 
 export default router;

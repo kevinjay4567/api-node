@@ -15,6 +15,7 @@ class UsersController {
     user.email = email;
     user.cedula = cedula;
     user.courses = courses;
+    user.id = users.length + 1;
     users.push(user);
     return res.json({
       message: "User register"
@@ -32,7 +33,20 @@ class UsersController {
         });
       }
     }
-    return res.json({
+    return res.status(404).json({
+      message: 'User not found'
+    })
+  }
+
+  find(req, res) {
+    const { id } = req.params;
+    for (let index = 0; index < users.length; index ++) {
+      const user = users[index];
+      if (user.id == id) {
+        return res.json(user)
+      }
+    }
+    return res.status(404).json({
       message: 'User not found'
     })
   }
