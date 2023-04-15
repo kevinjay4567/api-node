@@ -10,10 +10,12 @@ router.get('/', (req, res) => {
 })
 
 router.get('/users', UsersController.index); 
-router.delete('/test/:id', UsersController.destroy);
 router.post('/users', UsersController.store); 
+router.delete('/users/:id', UsersController.destroy);
 
 router.get('/courses', CoursesController.index);
+router.post('/courses', CoursesController.store);
+router.delete('/courses/:id', CoursesController.destroy);
 
 router.get('/login', AuthController.login);
 

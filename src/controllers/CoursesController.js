@@ -20,10 +20,10 @@ class CoursesController {
   }
 
   destroy(req, res) {
-    const { id } = req.body;
+    const { id } = req.params;
     for (let index = 0; index < courses.length; index++) {
       const course = courses[index];
-      if (course.id == id) {
+      if (course.code == id) {
         courses.splice(index, 1);
         return res.json({
           message: "Course delete"
@@ -34,7 +34,6 @@ class CoursesController {
       })
     }
   }
-
 
 }
 
