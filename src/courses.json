@@ -1,0 +1,362 @@
+[
+    {
+        "code": "1000008-M",
+        "name": "Geometría Vectorial y Analítica",
+        "credits": "4"
+    },
+    {
+        "code": "1000004-M",
+        "name": "Cálculo Diferencial",
+        "credits": "4"
+    },
+    {
+        "code": "1000005-M",
+        "name": "Cálculo Integral",
+        "credits": "4"
+    },
+    {
+        "code": "1000003-M",
+        "name": "Álgebra Lineal",
+        "credits": "4"
+    },
+    {
+        "code": "3006906",
+        "name": "Matemáticas Discretas",
+        "credits": "4"
+    },
+    {
+        "code": "3010651",
+        "name": "Estadística I",
+        "credits": "3"
+    },
+    {
+        "code": "1000019-M",
+        "name": "Física Mecánica",
+        "credits": "4"
+    },
+    {
+        "code": "1000007-M",
+        "name": "Ecuaciones Diferenciales",
+        "credits": "4"
+    },
+    {
+        "code": "1000006-M",
+        "name": "Cálculo en Varias Variables",
+        "credits": "4"
+    },
+    {
+        "code": "3006905",
+        "name": "Matemáticas Especiales",
+        "credits": "4"
+    },
+    {
+        "code": "3006907",
+        "name": "Métodos Numéricos",
+        "credits": "4"
+    },
+    {
+        "code": "3010334",
+        "name": "Fundamentos de Matemáticas",
+        "credits": "4"
+    },
+    {
+        "code": "3010391",
+        "name": "Geometría Aplicada",
+        "credits": "4"
+    },
+    {
+        "code": "3006915",
+        "name": "Estadística II",
+        "credits": "4"
+    },
+    {
+        "code": "3006927",
+        "name": "Estadística Descriptiva y Exploratoria",
+        "credits": "4"
+    },
+    {
+        "code": "3009137",
+        "name": "Estadística III",
+        "credits": "4"
+    },
+    {
+        "code": "1000017-M",
+        "name": "Física de Electricidad y Magnetismo",
+        "credits": "4"
+    },
+    {
+        "code": "1000020-M",
+        "name": "Física de Oscilaciones, Ondas y Óptica",
+        "credits": "4"
+    },
+    {
+        "code": "3006829",
+        "name": "Química General",
+        "credits": "3"
+    },
+    {
+        "code": "3006825",
+        "name": "Laboratorio de Química General",
+        "credits": "2"
+    },
+    {
+        "code": "1000009-M",
+        "name": "Biología General",
+        "credits": "3"
+    },
+    {
+        "code": "3006931",
+        "name": "Introducción al Manejo de Datos Estadísticos",
+        "credits": "4"
+    },
+    {
+        "code": "3010435",
+        "name": "Fundamentos de Programación",
+        "credits": "3"
+    },
+    {
+        "code": "3007744",
+        "name": "Programación Orientada a Objetos",
+        "credits": "3"
+    },
+    {
+        "code": "3007741",
+        "name": "Estructura de Datos",
+        "credits": "3"
+    },
+    {
+        "code": "3007847",
+        "name": "Bases de Datos I",
+        "credits": "3"
+    },
+    {
+        "code": "3010426",
+        "name": "Teoría de Lenguajes de Programación",
+        "credits": "3"
+    },
+    {
+        "code": "3010476",
+        "name": "Introducción a la Inteligencia Artificial",
+        "credits": "3"
+    },
+    {
+        "code": "3007867",
+        "name": "Sistemas Operativos",
+        "credits": "3"
+    },
+    {
+        "code": "3007865",
+        "name": "Redes y Telecomunicaciones I",
+        "credits": "3"
+    },
+    {
+        "code": "3011020",
+        "name": "Fundamentos de Analítica",
+        "credits": "3"
+    },
+    {
+        "code": "3007853",
+        "name": "Ingeniería de Software",
+        "credits": "3"
+    },
+    {
+        "code": "3007852",
+        "name": "Ingeniería de Requisitos",
+        "credits": "3"
+    },
+    {
+        "code": "3010440",
+        "name": "Calidad de Software",
+        "credits": "3"
+    },
+    {
+        "code": "3010438",
+        "name": "Introducción a la Ingeniería de Sistemas e Informática",
+        "credits": "2"
+    },
+    {
+        "code": "3007324",
+        "name": "Investigación de Operaciones I",
+        "credits": "3"
+    },
+    {
+        "code": "3010415",
+        "name": "Introducción al Análisis de Decisiones",
+        "credits": "3"
+    },
+    {
+        "code": "3007331",
+        "name": "Simulación de Sistemas",
+        "credits": "3"
+    },
+    {
+        "code": "3010408",
+        "name": "Fundamentos de Proyectos en Ingeniería",
+        "credits": "3"
+    },
+    {
+        "code": "3010407",
+        "name": "Estructuración y Evaluación de Proyectos de Ingeniería",
+        "credits": "3"
+    },
+    {
+        "code": "3010439",
+        "name": "Proyecto Integrado de Ingeniería",
+        "credits": "4"
+    },
+    {
+        "code": "3008883",
+        "name": "Fundamentos de Sistemas de Información e Inteligencia de Negocios",
+        "credits": "3"
+    },
+    {
+        "code": "3007854",
+        "name": "Técnicas de Aprendizaje Estadístico",
+        "credits": "3"
+    },
+    {
+        "code": "3007860",
+        "name": "Sistema de Recuperación de Información de web",
+        "credits": "3"
+    },
+    {
+        "code": "3007862",
+        "name": "Visión Artificial",
+        "credits": "3"
+    },
+    {
+        "code": "3009150",
+        "name": "Redes Neuronales Artificiales y Algoritmos Bioinspirados",
+        "credits": "3"
+    },
+    {
+        "code": "3009151",
+        "name": "Introducción a la Robótica",
+        "credits": "3"
+    },
+    {
+        "code": "3007850",
+        "name": "Diseño y Construcción de Productos de Software",
+        "credits": "3"
+    },
+    {
+        "code": "3007848",
+        "name": "Bases de Datos II",
+        "credits": "3"
+    },
+    {
+        "code": "3009430",
+        "name": "Análisis y Diseño de Algoritmos",
+        "credits": "3"
+    },
+    {
+        "code": "3007871",
+        "name": "Programación Matemática",
+        "credits": "3"
+    },
+    {
+        "code": "3007872",
+        "name": "Sistemas Complejos",
+        "credits": "3"
+    },
+    {
+        "code": "3007325",
+        "name": "Investigación de Operaciones II",
+        "credits": "3"
+    },
+    {
+        "code": "3007311",
+        "name": "Dinámica de Sistemas",
+        "credits": "3"
+    },
+    {
+        "code": "3007873",
+        "name": "Teoría de la Organización Industrial",
+        "credits": "3"
+    },
+    {
+        "code": "3007851",
+        "name": "Gestión de Proyectos de Software",
+        "credits": "3"
+    },
+    {
+        "code": "3010836",
+        "name": "Cátedra de Sistemas: una Visión Histórico-Cultural de la Computación",
+        "credits": "2"
+    },
+    {
+        "code": "3010757",
+        "name": "Ciencias de la Computación y Aplicaciones Móviles",
+        "credits": "3"
+    },
+    {
+        "code": "3010585",
+        "name": "Introducción a la Creación de Videojuegos",
+        "credits": "3"
+    },
+    {
+        "code": "3009936",
+        "name": "Seguridad Web",
+        "credits": "3"
+    },
+    {
+        "code": "3007202",
+        "name": "Fundamentos de Economía",
+        "credits": "3"
+    },
+    {
+        "code": "3010425",
+        "name": "Teoría Administrativa y Organizacional",
+        "credits": "3"
+    },
+    {
+        "code": "3010500",
+        "name": "Gestión del Talento Humano",
+        "credits": "3"
+    },
+    {
+        "code": "3010524",
+        "name": "Fundamentos de Mercadeo",
+        "credits": "3"
+    },
+    {
+        "code": "3007323",
+        "name": "Investigación de Mercados",
+        "credits": "3"
+    },
+    {
+        "code": "3007595",
+        "name": "Redes Teleinformáticas I",
+        "credits": "4"
+    },
+    {
+        "code": "3007596",
+        "name": "Redes Teleinformáticas II",
+        "credits": "4"
+    },
+    {
+        "code": "3007597",
+        "name": "Redes Teleinformáticas III",
+        "credits": "4"
+    },
+    {
+        "code": "3011021",
+        "name": "Programación para Ingeniería",
+        "credits": "3"
+    },
+    {
+        "code": "3011034",
+        "name": "Servicios en la Nube",
+        "credits": "3"
+    },
+    {
+        "code": "3011019",
+        "name": "Desarrollo Web",
+        "credits": "3"
+    },
+    {
+        "code": "3011018",
+        "name": "Creación Multimedia",
+        "credits": "3"
+    }
+]
