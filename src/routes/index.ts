@@ -1,11 +1,11 @@
 import { Router } from "express";
-import UsersController from '../controllers/UsersController.js';
-import CoursesController from '../controllers/CoursesController.js';
-import AuthController from '../controllers/AuthController.js';
+import UsersController from '../controllers/UsersController';
+import CoursesController from '../controllers/CoursesController';
+import AuthController from '../controllers/AuthController';
 
 const router = Router();
 
-router.get('/', (req, res) => {
+router.get('/', (_, res) => {
   res.json({ message: 'Hello world' });
 })
 

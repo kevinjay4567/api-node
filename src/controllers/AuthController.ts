@@ -1,7 +1,9 @@
-import users from '../users.json' assert {type: 'json'};
+import IUser from '../interfaces/IUser'
+
+const users: Array<IUser> = []
 class AuthController {
 
-  login(req, res) {
+  login(req:any, res:any) {
     const { email, password } = req.body;
     users.forEach(user => {
       if(user.email == email && user.cedula == password) {

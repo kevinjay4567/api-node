@@ -1,25 +1,26 @@
-import Course from '../models/Course.js';
-import courses from '../courses.json' assert { type: 'json'};
+import ICourse from '../interfaces/ICourse';
 
+let courses: Array<ICourse> = []
 class CoursesController {
 
-  index(req, res) {
+  index(_:any, res:any) {
     res.json(courses)
   }
 
-  store(req, res) {
+  store(req:any, res:any) {
     const {code, name, credits } = req.body;
-    const course = new Course();
-    course.code = code;
-    course.name = name;
-    course.credits = credits;
+    const course: ICourse = {
+      code,
+      name,
+      credits
+    }
     courses.push(course);
     res.json({
       message: 'Course register'
     })
   }
 
-  destroy(req, res) {
+  destroy(req:any, res:any) {
     const { id } = req.params;
     for (let index = 0; index < courses.length; index++) {
       const course = courses[index];

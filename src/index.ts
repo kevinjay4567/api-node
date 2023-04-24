@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
-import morgan from "morgan";
-import router from "./routes/index.js";
+import router from "./routes/index";
 
 dotenv.config({ path: './.env'})
 
@@ -12,7 +11,6 @@ app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2);
 
 //middlewares
-app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 

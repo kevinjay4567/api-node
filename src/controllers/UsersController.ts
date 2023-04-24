@@ -1,28 +1,29 @@
-import users from '../users.json' assert { type: 'json'}
-import User from '../models/User.js';
+import IUser from '../interfaces/IUser';
 
+let users: Array<IUser> = []
 class UsersController {
 
-  index(req, res) {
+  index(_req:any, res:any) {
     return res.json(users)
   }
 
-  store(req, res) {
+  store(req:any, res:any) {
     const {name, age, email, cedula, courses } = req.body;
-    const user = new User();
-    user.age = age;
-    user.name = name;
-    user.email = email;
-    user.cedula = cedula;
-    user.courses = courses;
-    user.id = users.length + 1;
+    const user: IUser = {
+      age,
+      name,
+      email,
+      cedula,
+      courses,
+      id: 1
+    }  
     users.push(user);
     return res.json({
       message: "User register"
     })
   }
 
-  destroy(req, res) {
+  destroy(req:any, res:any) {
     const { id } = req.params;
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
@@ -38,7 +39,7 @@ class UsersController {
     })
   }
 
-  find(req, res) {
+  find(req:any, res:any) {
     const { id } = req.params;
     for (let index = 0; index < users.length; index ++) {
       const user = users[index];
