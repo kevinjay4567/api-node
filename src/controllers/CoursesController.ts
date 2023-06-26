@@ -1,14 +1,13 @@
 import ICourse from "../interfaces/ICourse";
 import { prisma } from "../db";
+import { userAuth } from "./AuthController";
 
 let courses: Array<ICourse> = [];
 class CoursesController {
-  async index(req: any, res: any) {
-    const { id } = req.body;
-
+  async index(_: any, res: any) {
     const user = await prisma.user.findUnique({
       where: {
-        id: id,
+        id: userAuth.id,
       },
       include: {
         courses: true,
@@ -26,16 +25,45 @@ class CoursesController {
     });
   }
 
-  store(req: any, res: any) {
-    const { code, name, credits } = req.body;
-    const course: ICourse = {
-      code,
-      name,
-      credits,
-    };
-    courses.push(course);
+  async showNoAddedCourses(_: any, res: any) {
+    const courses = await prisma.course.findMany({
+      where: {
+        NOT: {
+          users: {
+            some: {
+              id: userAuth.id,
+            },
+          },
+        },
+      },
+    });
+
+    return res.json({
+      message: "OK",
+      data: courses,
+    });
+  }
+
+  async store(req: any, res: any) {
+    const { name, credits, type } = req.body;
+
+    if (!name || !credits || !type) {
+      return res.status(400).json({
+        error: "Empty field",
+      });
+    }
+
+    const course = await prisma.course.create({
+      data: {
+        name: name,
+        credits: credits,
+        aprobe: false,
+        type: type,
+      },
+    });
     res.json({
       message: "Course register",
+      data: course,
     });
   }
 

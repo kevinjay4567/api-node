@@ -1,5 +1,4 @@
 import IUser from "../interfaces/IUser";
-import { Prisma } from "@prisma/client";
 import { prisma } from "../db";
 
 let users: Array<IUser> = [];
@@ -7,23 +6,6 @@ class UsersController {
   async index(_req: any, res: any) {
     const users = await prisma.user.findMany();
     return res.json(users);
-  }
-
-  async store(req: any, res: any) {
-    const { name, email, password } = req.body;
-    let user: Prisma.UserCreateInput;
-
-    user = {
-      name: name,
-      email: email,
-      password: password,
-    };
-
-    const createUser = await prisma.user.create({ data: user });
-    return res.json({
-      message: "User register",
-      data: createUser,
-    });
   }
 
   destroy(req: any, res: any) {

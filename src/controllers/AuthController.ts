@@ -2,7 +2,7 @@ import { prisma } from "../db";
 import jwt from "jsonwebtoken";
 import IUser from "../interfaces/IUser";
 
-let userAuth: IUser | any = {};
+export let userAuth: IUser | any = {};
 class AuthController {
   async login(req: any, res: any) {
     const { email, password } = req.body;
@@ -31,18 +31,35 @@ class AuthController {
   }
 
   async register(req: any, res: any) {
-    const { email, password, name } = req.body;
+    const { email, password, name, phone, nacionalidad } = req.body;
+    if (!email || !password || !name || !phone || !nacionalidad) {
+      return res.status(400).json({
+        error: "Empty field",
+      });
+    }
     await prisma.user
       .create({
         data: {
           name: name,
+          phone: phone,
+          nacionalidad: nacionalidad,
           email: email,
           password: password,
           courses: {
-            create: {
-              name: "Estructura de datos",
-              credits: 3,
-            },
+            create: [
+              {
+                name: "Estructura de datos",
+                credits: 3,
+                aprobe: false,
+                type: "Disciplinar obligatoria",
+              },
+              {
+                name: "Calculo diferencial",
+                credits: 4,
+                aprobe: false,
+                type: "Fundamenta obligatoria",
+              },
+            ],
           },
         },
       })
@@ -58,7 +75,7 @@ class AuthController {
       });
   }
 
-  async logout(req: any, res: any) {
+  async logout(_: any, res: any) {
     await prisma.token
       .deleteMany({
         where: {
@@ -77,6 +94,31 @@ class AuthController {
           error,
         });
       });
+  }
+
+  async profile(_: any, res: any) {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userAuth.id,
+      },
+      select: {
+        name: true,
+        nacionalidad: true,
+        phone: true,
+        email: true,
+      },
+    });
+
+    if (user) {
+      return res.json({
+        message: "OK",
+        data: user,
+      });
+    }
+
+    return res.status(404).json({
+      error: "User not found",
+    });
   }
 }
 

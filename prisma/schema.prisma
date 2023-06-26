@@ -11,11 +11,12 @@ datasource db {
 }
 
 model Course {
-  id      Int    @id @default(autoincrement())
+  id      Int     @id @default(autoincrement())
   credits Int
-  name    String
-  user    User   @relation(fields: [userId], references: [id])
-  userId  Int
+  name    String  @unique
+  aprobe  Boolean
+  type    String
+  users   User[]
 }
 
 model Token {
@@ -26,10 +27,12 @@ model Token {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
-  password String
-  name     String
-  courses  Course[]
-  tokens   Token[]
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  password     String
+  name         String
+  phone        Int
+  nacionalidad String
+  courses      Course[]
+  tokens       Token[]
 }

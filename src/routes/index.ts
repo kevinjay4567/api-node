@@ -12,19 +12,19 @@ router.get("/", (_, res) => {
 
 router.get("/users", UsersController.index);
 router.get("/users/:id", UsersController.find);
-router.post("/users", UsersController.store);
 router.delete("/users/:id", UsersController.destroy);
 
-router.get("/courses", CoursesController.index);
+router.get("/courses", AuthMiddleware.tokenVerify, CoursesController.index);
+router.get(
+  "/addCourses",
+  AuthMiddleware.tokenVerify,
+  CoursesController.showNoAddedCourses
+);
 router.post("/courses", CoursesController.store);
 router.delete("/courses/:id", CoursesController.destroy);
 
-/**
- * TODO:
- * Agregar la autenticacion por jwt
- * Agregar la ruta de logout
- */
 router.post("/login", AuthController.login);
+router.get("/profile", AuthMiddleware.tokenVerify, AuthController.profile);
 router.post("/register", AuthController.register);
 router.post("/logout", AuthMiddleware.tokenVerify, AuthController.logout);
 
