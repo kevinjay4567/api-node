@@ -1,58 +1,60 @@
-import IUser from '../interfaces/IUser';
+import IUser from "../interfaces/IUser";
+import { Prisma } from "@prisma/client";
+import { prisma } from "../db";
 
-let users: Array<IUser> = []
+let users: Array<IUser> = [];
 class UsersController {
-
-  index(_req:any, res:any) {
-    return res.json(users)
+  async index(_req: any, res: any) {
+    const users = await prisma.user.findMany();
+    return res.json(users);
   }
 
-  store(req:any, res:any) {
-    const {name, age, email, cedula, courses } = req.body;
-    const user: IUser = {
-      age,
-      name,
-      email,
-      cedula,
-      courses,
-      id: 1
-    }  
-    users.push(user);
+  async store(req: any, res: any) {
+    const { name, email, password } = req.body;
+    let user: Prisma.UserCreateInput;
+
+    user = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
+    const createUser = await prisma.user.create({ data: user });
     return res.json({
-      message: "User register"
-    })
+      message: "User register",
+      data: createUser,
+    });
   }
 
-  destroy(req:any, res:any) {
+  destroy(req: any, res: any) {
     const { id } = req.params;
     for (let index = 0; index < users.length; index++) {
       const user = users[index];
-      if(user.id == id) {
+      if (user.id == id) {
         users.splice(index, 1);
         return res.json({
-          message: 'User delete'
+          message: "User delete",
         });
       }
     }
     return res.status(404).json({
-      message: 'User not found'
-    })
+      message: "User not found",
+    });
   }
 
-  find(req:any, res:any) {
+  find(req: any, res: any) {
     const { id } = req.params;
-    for (let index = 0; index < users.length; index ++) {
+    for (let index = 0; index < users.length; index++) {
       const user = users[index];
       if (user.id == id) {
-        return res.json(user)
+        return res.json(user);
       }
     }
     return res.status(404).json({
-      message: 'User not found'
-    })
+      message: "User not found",
+    });
   }
-
 }
 
 const instance = new UsersController();
-export default instance
+export default instance;
