@@ -1,68 +1,56 @@
-import IUser from "../interfaces/IUser";
-import { prisma } from "../db";
-import { Request, Response } from "express";
+import { Context } from "hono";
+import { db } from "../dbclient";
+import { usersTable } from "../db/schema";
+import { eq } from "drizzle-orm";
 
-let users: Array<IUser> = [];
 class UsersController {
-  async index(_req: any, res: any) {
-    const users = await prisma.user.findMany();
-    return res.json(users);
-  }
+  index = async (c: Context) => {
+    const users = await db.select().from(usersTable);
+    return c.json(users);
+  };
 
-  async store(req: Request, res: Response) {
-    const user = await prisma.user.create({
-      data: {
-        name: "Kevin",
-        email: "kevin@mail.com",
-        password: "secret",
-        phone: 123123123,
-        nacionalidad: "COLOMBIA",
-      },
-    });
+  store = async (c: Context) => {
+    const user = await c.req.json();
 
-    if (!user) {
-      return res.json({
-        message: "Error al crear el usuario",
-      });
+    try {
+      await db.insert(usersTable).values(user);
+    } catch (error) {
+      console.error(error);
     }
 
-    return res.json({
-      message: `Usuario ${user.name} creado con exito`,
+    return c.json({
+      message: "Usuario creado con exito",
     });
-  }
+  };
 
-  async destroy(req: Request, res: Response) {
-    const { id } = req.params;
-    const user = await prisma.user.delete({
-      where: {
-        id: Number(id),
-      },
-    });
+  delete = async (c: Context) => {
+    const id = c.req.param("id");
 
-    if (!user) {
-      return res.status(404).json({
-        message: "Error al eliminar el usuario",
-      });
+    try {
+      await db.delete(usersTable).where(eq(usersTable.id, Number(id)));
+    } catch (error) {
+      console.error(error);
     }
 
-    return res.json({
-      message: `Usuario ${user.name} eliminado con exito`,
+    return c.json({
+      message: `Usuario ${id} eliminado con exito`,
     });
-  }
+  };
 
-  async find(req: Request, res: Response) {
-    const { id } = req.params;
-    const user = await prisma.user.findUnique({
-      where: {
-        id: Number(id),
-      },
-    });
+  find = async (c: Context) => {
+    const id = c.req.param("id");
+    const user = await db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.id, Number(id)));
 
-    return !user
-      ? res.status(404).json({ message: "Usuario no encontrado" })
-      : res.json(user);
-  }
+    if (!user[0]) {
+      c.status(404);
+      return c.json({ message: "Usuario no encontrado" });
+    }
+
+    return c.json(user[0]);
+  };
 }
 
-const instance = new UsersController();
-export default instance;
+export default new UsersController();

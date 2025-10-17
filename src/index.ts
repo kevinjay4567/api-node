@@ -1,30 +1,12 @@
-import dotenv from "dotenv";
-import express from "express";
-import router from "./routes/index";
-import cors from "cors";
+import { Hono } from "hono";
+import apiRouter from "./routes/index";
 
-dotenv.config({ path: "./.env" });
+const app = new Hono();
 
-const app = express();
-
-//settings
-app.set("port", process.env.PORT || 3000);
-app.set("json spaces", 2);
-
-//middlewares
-app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-//routes
-app.use("/api", router);
-app.get("/", (_, res) => {
-  return res.json({
-    message: "Server on",
-  });
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
 });
 
-//Serve
-app.listen(app.get("port"), () => {
-  console.log("Server on port " + app.get("port"));
-});
+app.route("/api", apiRouter);
+
+export default app;

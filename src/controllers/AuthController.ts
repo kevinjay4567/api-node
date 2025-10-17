@@ -1,4 +1,4 @@
-import { prisma } from "../db";
+import { prisma } from "../dbclient";
 import jwt from "jsonwebtoken";
 import IUser from "../interfaces/IUser";
 
