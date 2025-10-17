@@ -1,5 +1,6 @@
 import IUser from "../interfaces/IUser";
 import { prisma } from "../db";
+import { Request, Response } from "express";
 
 let users: Array<IUser> = [];
 class UsersController {
@@ -8,33 +9,58 @@ class UsersController {
     return res.json(users);
   }
 
-  destroy(req: any, res: any) {
-    const { id } = req.params;
-    for (let index = 0; index < users.length; index++) {
-      const user = users[index];
-      if (user.id == id) {
-        users.splice(index, 1);
-        return res.json({
-          message: "User delete",
-        });
-      }
+  async store(req: Request, res: Response) {
+    const user = await prisma.user.create({
+      data: {
+        name: "Kevin",
+        email: "kevin@mail.com",
+        password: "secret",
+        phone: 123123123,
+        nacionalidad: "COLOMBIA",
+      },
+    });
+
+    if (!user) {
+      return res.json({
+        message: "Error al crear el usuario",
+      });
     }
-    return res.status(404).json({
-      message: "User not found",
+
+    return res.json({
+      message: `Usuario ${user.name} creado con exito`,
     });
   }
 
-  find(req: any, res: any) {
+  async destroy(req: Request, res: Response) {
     const { id } = req.params;
-    for (let index = 0; index < users.length; index++) {
-      const user = users[index];
-      if (user.id == id) {
-        return res.json(user);
-      }
-    }
-    return res.status(404).json({
-      message: "User not found",
+    const user = await prisma.user.delete({
+      where: {
+        id: Number(id),
+      },
     });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "Error al eliminar el usuario",
+      });
+    }
+
+    return res.json({
+      message: `Usuario ${user.name} eliminado con exito`,
+    });
+  }
+
+  async find(req: Request, res: Response) {
+    const { id } = req.params;
+    const user = await prisma.user.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    return !user
+      ? res.status(404).json({ message: "Usuario no encontrado" })
+      : res.json(user);
   }
 }
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import UsersController from "../controllers/UsersController";
+import usersRouter from "./users";
 import CoursesController from "../controllers/CoursesController";
 import AuthController from "../controllers/AuthController";
 import AuthMiddleware from "../middlewares/AuthMiddleware";
@@ -10,9 +10,7 @@ router.get("/", (_, res) => {
   res.json({ message: "Hello world" });
 });
 
-router.get("/users", UsersController.index);
-router.get("/users/:id", UsersController.find);
-router.delete("/users/:id", UsersController.destroy);
+router.use("/users", usersRouter);
 
 router.get("/courses", AuthMiddleware.tokenVerify, CoursesController.index);
 router.get(
