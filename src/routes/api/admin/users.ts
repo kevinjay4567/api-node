@@ -1,12 +1,5 @@
-import UsersController from "../controllers/UsersController";
+import UsersController from "../../../controllers/users.controller";
 import { Hono } from "hono";
-
-/*const router = Router();
-
-router.get("/", UsersController.index);
-router.get("/:id", UsersController.find);
-router.post("/", UsersController.store);
-router.delete("/:id", UsersController.destroy);*/
 
 const usersRouter = new Hono();
 
