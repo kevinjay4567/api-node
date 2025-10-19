@@ -1,9 +1,8 @@
-import { Hono } from "hono";
+import AuthController from "../../controllers/auth.controller";
+import AuthMiddleware from "../../middlewares/auth.middleware";
 import usersRouter from "./admin/users";
 import authRouter from "./auth";
-import CoursesController from "../../controllers/CoursesController";
-import AuthController from "../../controllers/AuthController";
-import AuthMiddleware from "../../middlewares/auth.middleware";
+import { Hono } from "hono";
 
 const apiRouter = new Hono();
 
@@ -13,9 +12,7 @@ apiRouter.get("/", (c) => {
   });
 });
 
-apiRouter.post("/login", (c) =>
-  c.json({ message: "TODO: login work in progress" })
-);
+apiRouter.post("/login", AuthController.login);
 
 // Middlewares
 apiRouter.use("/auth/*", AuthMiddleware.basic);
@@ -26,18 +23,3 @@ apiRouter.route("/auth", authRouter);
 apiRouter.route("/admin/users", usersRouter);
 
 export default apiRouter;
-
-/*
-router.get("/courses", AuthMiddleware.tokenVerify, CoursesController.index);
-router.get(
-  "/addCourses",
-  AuthMiddleware.tokenVerify,
-  CoursesController.showNoAddedCourses
-);
-router.post("/courses", CoursesController.store);
-router.delete("/courses/:id", CoursesController.destroy);
-
-router.post("/login", AuthController.login);
-router.get("/profile", AuthMiddleware.tokenVerify, AuthController.profile);
-router.post("/register", AuthController.register);
-router.post("/logout", AuthMiddleware.tokenVerify, AuthController.logout);*/

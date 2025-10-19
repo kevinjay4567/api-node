@@ -1,21 +1,17 @@
+import userRepository from "../repositories/user.repository";
 import { Context } from "hono";
-import { db } from "../dbclient";
-import { usersTable } from "../db/schema";
-import { eq } from "drizzle-orm";
 
 class UsersController {
-  index = async (c: Context) => {
-    const users = await db.select().from(usersTable);
-    return c.json(users);
-  };
+  index = async (c: Context) => c.json(await userRepository.all());
 
   store = async (c: Context) => {
     const user = await c.req.json();
 
     try {
-      await db.insert(usersTable).values(user);
+      await userRepository.save(user);
     } catch (error) {
-      console.error(error);
+      c.status(501);
+      return c.json({ error });
     }
 
     return c.json({
@@ -27,9 +23,10 @@ class UsersController {
     const id = c.req.param("id");
 
     try {
-      await db.delete(usersTable).where(eq(usersTable.id, Number(id)));
+      await userRepository.delete(Number(id));
     } catch (error) {
-      console.error(error);
+      c.status(501);
+      return c.json({ error });
     }
 
     return c.json({
@@ -39,17 +36,14 @@ class UsersController {
 
   find = async (c: Context) => {
     const id = c.req.param("id");
-    const user = await db
-      .select()
-      .from(usersTable)
-      .where(eq(usersTable.id, Number(id)));
+    const user = await userRepository.findById(Number(id));
 
-    if (!user[0]) {
+    if (!user) {
       c.status(404);
       return c.json({ message: "Usuario no encontrado" });
     }
 
-    return c.json(user[0]);
+    return c.json(user);
   };
 }
 

@@ -1,4 +1,4 @@
-export default interface ICourse {
+export default interface Course {
   code: String;
   name: String;
   credits: Number;

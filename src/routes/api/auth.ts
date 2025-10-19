@@ -1,10 +1,6 @@
+import { decodeTokenPayload } from "../../services/token.service";
+import userRepository from "../../repositories/user.repository";
 import { Hono } from "hono";
-import { decode, jwt, sign, verify } from "hono/jwt";
-import { db } from "../../dbclient";
-import { usersTable } from "../../db/schema";
-import { eq } from "drizzle-orm";
-
-const secret = process.env.JWT_SECRET ?? "a-string-secret-at-least-256-bits-long";
 
 // TODO: Auth router in progress
 const authRouter = new Hono();
@@ -16,23 +12,17 @@ authRouter.post("/logout", (c) =>
 authRouter.get("/profile", async (c) => {
   const token = c.req.header("Authorization")?.split(" ")[1];
 
-  if (!token) {
+  try {
+    const payloadUserId = decodeTokenPayload(token)["sub"];
+    const user = await userRepository.findById(Number(payloadUserId));
+
+    if (!user) throw new Error("Error al encontrar al usuario");
+
+    return c.json(user);
+  } catch (error) {
     c.status(500);
-    return c.json({ error: "Error al leer el token" });
+    return c.json({ error });
   }
-
-  const payloadUserId = decode(token).payload['id'];
-  const user = await db
-    .select()
-    .from(usersTable)
-    .where(eq(usersTable.id, Number(payloadUserId)));
-
-  if (!user[0]) {
-    c.status(500);
-    return c.json({ error: "Error al buscar el usuario activo" });
-  }
-
-  return c.json(user[0]);
 });
 
 export default authRouter;

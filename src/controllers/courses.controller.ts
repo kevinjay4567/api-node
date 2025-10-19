@@ -1,6 +1,6 @@
-import ICourse from "../interfaces/ICourse";
+import ICourse from "../interfaces/Course";
 import { prisma } from "../dbclient";
-import { userAuth } from "./AuthController";
+import { userAuth } from "./auth.controller";
 
 let courses: Array<ICourse> = [];
 class CoursesController {
